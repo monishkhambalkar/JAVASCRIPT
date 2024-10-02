@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div>
+        <input type="text" name="" id="write">
+        <ul id="todo-list">
+            <li id="todo-1" class="classTodo" style="display: none;">todo</li>
+        </ul>
+    </div>
+</body>
+
+
+<script>
+
+    let write = document.getElementById('write');
+    let todoist = document.getElementById('todo-list');
+    
+    let counter = 1;
+
+    write.addEventListener('keydown', function(e) {
+        if(e.key == "Enter"){
+            console.log(this.value);
+            let newTodo = document.createElement('li');
+            newTodo.id = `todo-${counter}`;
+            newTodo.className = `classTodo`;
+            newTodo.textContent = this.value;
+            todoist.appendChild(newTodo);
+            this.value = ''; 
+            counter++;
+        };
+    });
+
+
+
+    
+
+
+</script>
+
+</html>

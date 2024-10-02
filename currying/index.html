@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>
+        Hello
+    </h1>
+
+    <button id="button1">button1</button>
+    <button id="button2">button2</button>
+
+
+    <script>
+
+        function add(a,b,c){
+            return a+b+c;
+        }
+        console.log(add(1,2,3));
+
+        //without currying
+        // function handleEvent(eventType, elementId, callback) {
+        // const element = document.getElementById(elementId);
+        // element.addEventListener(eventType, callback);
+        // }
+        // handleEvent('click', 'button1', () => console.log('Button 1 clicked')); 
+        // handleEvent('click', 'button2', () => console.log('Button 2 clicked'));
+
+        //with currying
+        
+        const handleEvent = eventType => elementId => callback =>{
+            const element = document.getElementById(elementId);
+            element.addEventListener(eventType, callback);
+        }
+
+        const handleClick = handleEvent('click');
+
+        handleClick('button1')(()=>console.log('Button 1 clicked'));
+        handleClick('button2')(()=>console.log('Button 2 clicked'));
+
+    </script>
+</body>
+</html>

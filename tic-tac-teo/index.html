@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TIC-TAC-TEO</title>
+</head>
+<style>
+    body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    .row{
+        display: flex;
+    }
+    .col{
+        height: 65px;
+        width: 65px;
+        border: 1px solid black;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 30px;
+        cursor: pointer;
+    }
+</style>
+<body>
+    <div class="container">
+        <div class="grid">
+            <div class="row">
+                <div onclick="handleClick(this)" id="0" class="col"></div>
+                <div onclick="handleClick(this)" id="1" class="col"></div>
+                <div onclick="handleClick(this)" id="2" class="col"></div>
+            </div>
+            <div class="row">
+                <div onclick="handleClick(this)" id="3" class="col"></div>
+                <div onclick="handleClick(this)" id="4" class="col"></div>
+                <div onclick="handleClick(this)" id="5" class="col"></div>
+            </div>
+            <div class="row">
+                <div onclick="handleClick(this)" id="6" class="col"></div>
+                <div onclick="handleClick(this)" id="7" class="col"></div>
+                <div onclick="handleClick(this)" id="8" class="col"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+
+        let currentPlayer = 'X';
+        let array = Array(9).fill('null');
+
+        function checkWinner(){
+            if (
+                (array[0] !== null &&  array[0] == array[1] && array[1] == array[2]) ||
+                (array[3] !== null &&  array[3] == array[4] && array[4] == array[5]) ||
+                (array[6] !== null &&  array[6] == array[7] && array[7] == array[8]) ||
+                (array[0] !== null &&  array[0] == array[3] && array[3] == array[6]) ||
+                (array[1] !== null &&  array[1] == array[4] && array[4] == array[7]) ||
+                (array[2] !== null &&  array[2] == array[5] && array[5] == array[8]) ||
+                (array[0] !== null &&  array[0] == array[4] && array[4] == array[8]) ||
+                (array[2] !== null &&  array[2] == array[4] && array[4] == array[6]) 
+            )
+            {
+                alert("you are winner");
+            }
+        }
+
+        function handleClick(el) {
+            const id = Number(el.id);
+            if (array[id] !== null) return;
+            array[id] = currentPlayer;
+            let tagID = document.getElementById(el.id)
+            tagID.innerText = currentPlayer;
+            checkWinner()
+            currentPlayer = currentPlayer === "X" ? "O" : "X";
+        }
+
+
+    </script>
+
+
+</body>
+</html>
