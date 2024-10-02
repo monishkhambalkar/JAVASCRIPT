@@ -41,7 +41,7 @@
 // Reassignable	    Yes	                                Yes	                            No
 // Re-declarable	Yes	                                No	                            No
 
-// Summary:
+// Summary:git add
 // Use var for backward compatibility, though it's rarely recommended now.
 // Use let for variables that will be reassigned.
 // Use const for variables that shouldn’t be reassigned (but keep in mind that the content of objects and arrays can still change).
