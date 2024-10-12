@@ -1,0 +1,132 @@
+//JavaScript's window object represents the browser window or tab that contains a webpage. It acts as the global object, meaning that global variables and functions become properties and methods of window. Below is a list of commonly used window functions with explanations and examples:
+
+// 1. window.alert()
+// Displays an alert dialog box with a specified message and an OK button.
+window.alert("Hello, world!");
+
+// 2. window.confirm()
+// Displays a dialog box with a specified message, along with OK and Cancel buttons. It returns true if the user clicks OK, and false if the user clicks Cancel.
+
+// Example:
+if (window.confirm("Do you want to proceed?")) {
+  console.log("User pressed OK");
+} else {
+  console.log("User pressed Cancel");
+}
+
+// 3. window.prompt()
+// Displays a dialog box that prompts the user for input. It returns the text entered by the user, or null if the user cancels the prompt.
+
+// Example:
+let name = window.prompt("What is your name?");
+if (name !== null) {
+  console.log("Hello, " + name);
+}
+
+// 4. window.open()
+// Opens a new browser window or tab with a specified URL. You can also specify additional parameters, like the size or features of the new window.
+window.open("https://www.example.com", "_blank", "width=500,height=500");
+
+// 5. window.close()
+// Closes the current window, but it can only close windows that were opened via JavaScript (like with window.open()).
+let newWindow = window.open("https://www.example.com");
+newWindow.close();
+
+// 6. window.setTimeout()
+// Executes a function or piece of code after a specified delay (in milliseconds).
+window.setTimeout(() => {
+  console.log("This runs after 2 seconds");
+}, 2000);
+
+// 7. window.setInterval()
+// Executes a function or code repeatedly, with a fixed time delay between each execution (in milliseconds).
+let count = 0;
+let interval = window.setInterval(() => {
+  count++;
+  console.log("Count:", count);
+  if (count === 5) {
+    window.clearInterval(interval); // Stops the interval after 5 executions
+  }
+}, 1000);
+
+// 8. window.clearTimeout()
+// Cancels a setTimeout() action before it executes.
+let timeoutId = window.setTimeout(() => {
+  console.log("This won't run");
+}, 5000);
+window.clearTimeout(timeoutId);
+
+// 9. window.clearInterval()
+// Stops an interval that was started by setInterval().
+
+let intervalId = window.setInterval(() => {
+  console.log("This runs every 1 second");
+}, 1000);
+window.clearInterval(intervalId);
+
+// 10. window.scrollTo()
+// Scrolls the window to a specified position.
+
+window.scrollTo(0, 500);
+
+// 11. window.scrollBy()
+// Scrolls the window by a specified number of pixels relative to the current scroll position.
+window.scrollBy(0, 100);
+
+// 12. window.location
+// The window.location object holds information about the current URL and can be used to redirect the browser to another page.
+console.log(window.location.href); // Logs the current URL
+window.location.href = "https://www.example.com";
+
+// 13. window.history
+// The window.history object contains the browser's history stack. You can use it to navigate back, forward, or manipulate the session history.
+
+window.history.back(); // Goes back to the previous page
+window.history.forward();
+
+// 14. window.navigator
+// Provides information about the browser and operating system.
+
+console.log(window.navigator.userAgent);
+
+// 15. window.localStorage
+// Stores data with no expiration time in the browser. Data persists even after the browser is closed.
+
+window.localStorage.setItem("username", "JohnDoe");
+let username = window.localStorage.getItem("username");
+console.log(username);
+
+// 16. window.sessionStorage
+// Stores data for the duration of the page session. Data is cleared when the page session ends (e.g., when the tab or window is closed).
+window.sessionStorage.setItem("sessionKey", "12345");
+let sessionKey = window.sessionStorage.getItem("sessionKey");
+console.log(sessionKey);
+
+// 17. window.matchMedia()
+// Checks whether the document matches a media query and provides a MediaQueryList object, allowing you to monitor changes in screen size or orientation.
+
+let mediaQuery = window.matchMedia("(max-width: 600px)");
+if (mediaQuery.matches) {
+  console.log("Screen width is 600px or less");
+} else {
+  console.log("Screen width is more than 600px");
+}
+
+// 18. window.addEventListener()
+// Attaches an event handler to the window.
+window.addEventListener("resize", () => {
+  console.log("Window was resized");
+});
+
+// 19. window.removeEventListener()
+// Removes an event handler that was added using addEventListener().
+
+let resizeHandler = () => {
+  console.log("Window resized");
+};
+window.addEventListener("resize", resizeHandler);
+window.removeEventListener("resize", resizeHandler);
+
+// 20. window.print()
+// Opens the browser's print dialog to print the current page.
+window.print();
