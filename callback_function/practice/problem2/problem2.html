@@ -1,0 +1,72 @@
+<!-- Asynchronous Image Loading with a Loader:
+
+Question: You want to display a loading spinner while an image is being fetched from a server. Create a function that shows the spinner until the image is fully loaded using a callback.
+Hint: Handle the onload event for the image and use a callback to remove the spinner. -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Async Image Loading with Loader</title>
+    <style>
+        #spinner {
+            display: none;
+            width: 50px;
+            height: 50px;
+            border: 6px solid #ccc;
+            border-top: 6px solid #333;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        #imageContainer img {
+            max-width: 100%;
+        }
+    </style>
+   
+</head>
+<body>
+    <div id="spinner"></div>
+    <div id="imageContainer"></div>
+
+
+    <script>
+
+        const imageUrl = "https://via.placeholder.com/600";
+
+        function loadImageWithLoader(url, callback){
+            const spinner = document.getElementById('spinner');
+            const container = document.getElementById('imageContainer');
+
+            spinner.style.display = 'block';
+
+            const img = new Image();
+
+            img.onload = function(){
+                spinner.style.display = 'none';
+                container.appendChild(img);
+                if (callback) callback();
+            }
+
+            img.onerror = function(){
+                spinner.style.display = 'none';
+                container.textContent = "filed to load image ";
+            }
+
+            img.src = url;
+
+        }
+
+        loadImageWithLoader(imageUrl, ()=>{
+            console.log("Image loaded success fully")
+        })
+
+    </script>
+
+</body>
+</html>

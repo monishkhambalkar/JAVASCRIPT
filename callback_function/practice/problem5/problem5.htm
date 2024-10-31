@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <form id="registrationForm">
+        <div>
+          <label for="email">Email:</label>
+          <input type="email" id="email" name="email">
+          <small id="emailError"></small>
+        </div>
+        <div>
+          <label for="password">Password:</label>
+          <input type="password" id="password" name="password">
+          <small id="passwordError"></small>
+        </div>
+        <div>
+          <label for="confirmPassword">Confirm Password:</label>
+          <input type="password" id="confirmPassword" name="confirmPassword">
+          <small id="confirmPasswordError"></small>
+        </div>
+        <button type="submit">Register</button>
+      </form>
+      
+
+      <script>
+        // Callback function to validate email
+const validateEmail = (email) => {
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  return emailRegex.test(email);
+};
+
+// Callback function to validate password strength
+const validatePasswordStrength = (password) => {
+  const passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
+  return passwordRegex.test(password);
+};
+
+// Callback function to confirm passwords match
+const confirmPasswordMatch = (password, confirmPassword) => {
+  return password === confirmPassword;
+};
+
+// Main function to validate form
+const validateForm = (event) => {
+  // Prevent form submission
+  event.preventDefault();
+
+  // Fetch form values
+  const email = document.getElementById("email").value;
+  const password = document.getElementById("password").value;
+  const confirmPassword = document.getElementById("confirmPassword").value;
+
+  // Validation checks using callback functions
+  let isValid = true;
+
+  // Email validation
+  if (!validateEmail(email)) {
+    document.getElementById("emailError").innerText = "Invalid email format";
+    isValid = false;
+  } else {
+    document.getElementById("emailError").innerText = "";
+  }
+
+  // Password strength validation
+  if (!validatePasswordStrength(password)) {
+    document.getElementById("passwordError").innerText = "Password must be at least 8 characters long, include a number, a lowercase and an uppercase letter.";
+    isValid = false;
+  } else {
+    document.getElementById("passwordError").innerText = "";
+  }
+
+  // Confirm password validation
+  if (!confirmPasswordMatch(password, confirmPassword)) {
+    document.getElementById("confirmPasswordError").innerText = "Passwords do not match.";
+    isValid = false;
+  } else {
+    document.getElementById("confirmPasswordError").innerText = "";
+  }
+
+  // Submit the form if valid
+  if (isValid) {
+    // Submit form or do something else
+    alert("Form Submitted Successfully!");
+  }
+};
+
+// Attach the validateForm function to form submit event
+document.getElementById("registrationForm").addEventListener("submit", validateForm);
+
+      </script>
+</body>
+</html>

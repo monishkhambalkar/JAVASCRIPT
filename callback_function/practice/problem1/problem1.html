@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Debounced Search</title>
+</head>
+<body>
+
+    <input type="text" name="" id="search-bar" placeholder="Hello">
+
+    <script>
+
+        var searchbar = document.getElementById('search-bar');
+
+        function debounce(callback, delay){
+            let timerId;
+            return function(...args){
+                clearTimeout(timerId);
+                timerId = setTimeout(()=>{
+                    callback(...args);
+                }, delay)
+            }
+        }
+
+        const debouncedSearch = debounce((event)=>{
+            const query = event.target.value;
+            if(query.trim().length > 0 ){
+                fetchResultQuery(query);
+            }
+        },500);
+
+
+        function fetchResultQuery(query){
+            console.log(query);
+        }
+
+        searchbar.addEventListener('input', debouncedSearch);
+
+    </script>
+
+</body>
+</html>
