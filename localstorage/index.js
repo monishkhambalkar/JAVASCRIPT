@@ -168,5 +168,55 @@ function clearLocalStorageExcept(exceptKey) {
 }
 clearLocalStorageExcept("userSettings");
 
-// Intermediate - Local Storage/Session Storage:
-// Write a function that moves a user’s session data from session storage to local storage after the user clicks a button
+// Advanced - Cookies:
+// Write a JavaScript function that parses all cookies into an object with key-value pairs.
+
+function parseCookie() {
+  return document.cookie
+    .split(";")
+    .map((cookie) => cookie.split("=."))
+    .reduce((accumulator, [key, value]) => {
+      accumulator[decodeURIComponent(key.trim())] = decodeURIComponent(
+        value.trim()
+      );
+      return accumulator;
+    }, {});
+}
+
+const cookies = parseCookie();
+console.log(cookies);
+
+// Advanced - Session Storage/Local Storage:
+// Create a function that synchronizes session storage with local storage whenever there is a change in either storage type.
+
+function synchronizeStorage() {
+  const SESSION_KEY = "sessionData";
+  const LOCAL_KEY = "localData";
+
+  const localData = localStorage.getItem(LOCAL_KEY);
+  if (localData !== null) {
+    sessionStorage.setItem(SESSION_KEY, localData);
+  }
+
+  window.addEventListener("storage", (event) => {
+    if (event.key == LOCAL_KEY && event.newValue !== value) {
+      sessionStorage.setItem(SESSION_KEY, event.newValue);
+    }
+  });
+
+  const originalSetItem = sessionStorage.setItem;
+  sessionStorage.setItem = function (key, value) {
+    if (key == SESSION_KEY) {
+      localStorage.setItem(LOCAL_KEY, value);
+    }
+    originalSetItem.apply(this, arguments);
+  };
+
+  const originalRemoveItem = sessionStorage.removeItem;
+  sessionStorage.removeItem = function (key) {
+    if (key === SESSION_KEY) {
+      localStorage.removeItem(LOCAL_KEY);
+    }
+    originalRemoveItem.apply(this, arguments);
+  };
+}
